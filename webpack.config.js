@@ -42,7 +42,7 @@ module.exports = {
         filename: "bundle.js"
     },
     devServer: {
-        port: 3000,
+        port: 1000,
         hotOnly: true,//hot-loader do not work with REDUX
         contentBase: [path.join(__dirname, "public/")],
         watchContentBase: true,

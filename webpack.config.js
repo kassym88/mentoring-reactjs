@@ -1,10 +1,18 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = {
     entry: ["./src/index"],
     devtool: 'source-map',
-    plugins: [new webpack.HotModuleReplacementPlugin()],//hot-loader do not work with REDUX
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true
+        }),
+        new HtmlWebpackHarddiskPlugin()
+    ],
     module: {
         rules: [
             {
@@ -39,12 +47,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist/"),
         publicPath: "/dist/",
-        filename: "bundle.js"
+        filename: '[name].[hash].js'
     },
     devServer: {
         port: 1000,
-        hotOnly: true,//hot-loader do not work with REDUX
-        contentBase: [path.join(__dirname, "public/")],
+        hotOnly: true,
+        contentBase: [path.join(__dirname, "dist/")],
         watchContentBase: true,
         compress: true,
         publicPath: "/dist/"

@@ -19,7 +19,7 @@ const deleteFolderRecursive = function(path) {
 };
 
 module.exports = function(env, options) {
-    const isProd = options.mode === 'production';
+    const isProd = (env && env.production) || options.mode === 'production';
     const cfg = {
         entry: ["./src/index"],
         plugins: [],
